@@ -6,6 +6,7 @@ angular.module('shortly', [
   'ngRoute'
 ])
 .config(function($routeProvider, $httpProvider) {
+  console.log('route to: ', $routeProvider);
   $routeProvider
     .when('/signin', {
       templateUrl: 'app/auth/signin.html',
@@ -16,6 +17,24 @@ angular.module('shortly', [
       controller: 'AuthController'
     })
     // Your code here
+    .when('/links', {
+      templateUrl: 'app/links/links.html',
+      controller: 'LinksController'
+    })
+
+    .when('/shorten', {
+      templateUrl: 'app/shorten/shorten.html',
+      controller: 'ShortenController'
+    })
+
+    .when('/', {
+      templateUrl: 'app/auth/signin.html',
+      controller: 'AuthController'
+    })
+
+    .when('api/users/signin', {
+
+    });
 
     // We add our $httpInterceptor into the array
     // of interceptors. Think of it like middleware for your ajax calls
