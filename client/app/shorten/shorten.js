@@ -14,12 +14,14 @@ angular.module('shortly.shorten', [])
     // console.log('Links: ', Links.all);
     console.log('addLink: ', $scope.link);
 
-    if($scope.link.url.slice(0,7) !== 'http://'){
+    if($scope.link.url !== null && $scope.link.url.slice(0,7) !== 'http://'){
       $scope.link.url = 'http://' + $scope.link.url;
     }
 
     Links.shortenLink($scope.link);
     $scope.link.url = null;
+
+    $location.path( "/links" );
 
     //Send link to server
     //Hopefully, it will return a shortened version

@@ -2,7 +2,8 @@ angular.module('shortly.services', [])
 
 .factory('Links', function ($http) {
   // Your code here
-  // var addLink =
+  var linkArray = [];
+  console.log('entered factory');
   var shortenLink = function(data){
     console.log('shortenLink: ', data);
     return $http({
@@ -12,12 +13,32 @@ angular.module('shortly.services', [])
     })
     .then(function(resp){
       console.log('shorten resp: ', resp.data);
-      return resp.data.something;
+      linkArray.push(resp.data);
+      return resp.data;
+    });
+  };
+
+  var getLocalLinks = function(){
+    console.log('getLocalLinks ', linkArray);
+    return linkArray;
+  };
+
+  var getLinks = function(callback){
+    console.log('called getLinks in services');
+    return $http({
+      method: 'GET',
+      url: '/api/links'
+    })
+    .then(function(resp){
+      console.log('got links: ', resp.data);
+      linkArray = resp.data;
+      return resp.data;
     });
   };
   return {
     shortenLink : shortenLink,
-
+    getLinks: getLinks,
+    getLocalLinks: getLocalLinks
   };
 })
 .factory('Auth', function ($http, $location, $window) {

@@ -1,6 +1,19 @@
 <div id='container' ng-controller = "LinksController">
   <h1>Links</h1>
   <ul>
-    <li ng-repeat="link in data.links">{{ link }}</li>
+  <!-- {"code":"a9736","url":"http://www.amazon.com","visits":0,"base_url":"http://localhost:3000","title":"Amazon.com: Online Shopping for Electronics, Apparel, Computers, Books, DVDs &amp; more","_id":"543879aabedbd52d292a65e3","__v":0} -->
+  <!-- <div class="header inline">Title</div> -->
+  <div class="header inline">URL</div>
+  <div class="header inline">Shortened URL</div>
+
+
+
+    <li ng-repeat="link in data.links">
+      <a href="{{link.url}}">
+        <!-- <div class="header inline">{{link.title}}</div> -->
+        <div class="header inline">{{link.url}}</div>
+        <div class="header inline">{{link.base_url + '/' + link.code}}</div>
+      </a>
+    </li>
   </ul>
 </div>
