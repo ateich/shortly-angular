@@ -3,6 +3,7 @@ angular.module('shortly.services', [])
 .factory('Links', function ($http) {
   // Your code here
   var linkArray = [];
+
   var shortenLink = function(data){
     return $http({
       method: 'POST',

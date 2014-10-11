@@ -1,45 +1,74 @@
 angular.module('shortly', [
+  'ui.router',
   'shortly.services',
   'shortly.links',
   'shortly.shorten',
   'shortly.auth',
-  'ngRoute',
   'ngFx'
 ])
-.config(function($routeProvider, $httpProvider) {
-  console.log('route to: ', $routeProvider);
-  $routeProvider
-    .when('/signin', {
-      templateUrl: 'app/auth/signin.html',
+
+.config(function($stateProvider, $urlRouterProvider, $httpProvider) {
+
+  $urlRouterProvider.otherwise('/signin');
+
+  $stateProvider
+    .state('signin', {
+      url: '/signin',
+      templateUrl: "app/auth/signin.html",
       controller: 'AuthController'
     })
-    .when('/signup', {
+    .state('signup', {
+      url: '/signup',
       templateUrl: 'app/auth/signup.html',
       controller: 'AuthController'
     })
-    .when('/links', {
+    .state('links', {
+      url: '/links',
       templateUrl: 'app/links/links.html',
       controller: 'LinksController'
     })
-
-    .when('/shorten', {
+    .state('shorten', {
+      url: '/shorten',
       templateUrl: 'app/shorten/shorten.html',
       controller: 'ShortenController'
-    })
-
-    .when('/', {
-      templateUrl: 'app/auth/signin.html',
-      controller: 'AuthController'
-    })
-
-    .when('api/users/signin', {
-
     });
 
-    // We add our $httpInterceptor into the array
-    // of interceptors. Think of it like middleware for your ajax calls
     $httpProvider.interceptors.push('AttachTokens');
 })
+// .config(function($routeProvider, $httpProvider) {
+//   console.log('route to: ', $routeProvider);
+//   $routeProvider
+//     .when('/signin', {
+//       templateUrl: 'app/auth/signin.html',
+//       controller: 'AuthController'
+//     })
+//     .when('/signup', {
+//       templateUrl: 'app/auth/signup.html',
+//       controller: 'AuthController'
+//     })
+//     .when('/links', {
+//       templateUrl: 'app/links/links.html',
+//       controller: 'LinksController'
+//     })
+
+//     .when('/shorten', {
+//       templateUrl: 'app/shorten/shorten.html',
+//       controller: 'ShortenController'
+//     })
+
+//     .when('/', {
+//       templateUrl: 'app/auth/signin.html',
+//       controller: 'AuthController'
+//     })
+
+//     .when('api/users/signin', {
+
+//     });
+
+//     // We add our $httpInterceptor into the array
+//     // of interceptors. Think of it like middleware for your ajax calls
+//     $httpProvider.interceptors.push('AttachTokens');
+// })
 .factory('AttachTokens', function ($window) {
   // this is an $httpInterceptor
   // its job is to stop all out going request
