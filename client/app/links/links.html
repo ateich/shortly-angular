@@ -1,10 +1,11 @@
 <div id='container' ng-controller = "LinksController">
   <h1>Links</h1>
   <button ng-click="goToShorten()">Shorten a Link</button><br><br>
+  <input ng-model='filterby.url'>
   <div class="header inline">URL</div>
   <div class="header inline">Shortened URL</div>
   <ul>
-    <li class="noDot" ng-repeat="link in data.links">
+    <li class="noDot fx-rotate-counterclock fx-speed-800" ng-repeat="link in data.links | filter:filterby">
       <a href="{{link.url}}">
         <div class="inline">{{link.url}}</div>
         <div class="inline">{{link.base_url + '/' + link.code}}</div>
@@ -12,3 +13,12 @@
     </li>
   </ul>
 </div>
+<!-- <div id='container' ng-controller = "LinksController">
+  <h1>Links</h1>
+  <button ng-click="goToShorten()">Shorten a Link</button><br><br>
+  <input ng-model='filterby.url'>
+  <div class="header inline">URL</div>
+  <div class="header inline">Shortened URL</div>
+  <ul>
+  </ul>
+</div> -->

@@ -1,4 +1,4 @@
-angular.module('shortly.links', [])
+angular.module('shortly.links', ['ngFx'])
 
 .controller('LinksController', function ($scope, $location, Links) {
   $scope.data = {

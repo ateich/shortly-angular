@@ -3,7 +3,8 @@ angular.module('shortly', [
   'shortly.links',
   'shortly.shorten',
   'shortly.auth',
-  'ngRoute'
+  'ngRoute',
+  'ngFx'
 ])
 .config(function($routeProvider, $httpProvider) {
   console.log('route to: ', $routeProvider);
